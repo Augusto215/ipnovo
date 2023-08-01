@@ -5,19 +5,22 @@
 <body>
 <p id="address"> Aracruz </p>
 
-<script language="Javascript" src="https://geoplugin.net/javascript.gp" type="text/javascript"></script>
-
 <script>
-// certifique-se de que o DOM esteja totalmente carregado antes de executar o código
-document.addEventListener("DOMContentLoaded", function() {
-  // obter o endereço IP
-  var city = geoplugin_city();
-  // selecionar o parágrafo pelo seu ID
-  var ipElement = document.getElementById("address");
-  
-  // definir o texto do parágrafo para o endereço IP
-  ipElement.innerHTML = city;
-});
+    // Função para atualizar o endereço no parágrafo
+    function atualizarComentario(cidade) {
+        document.getElementById('address').innerText = cidade;
+    }
+    
+    fetch('https://api.ipapi.com/check?access_key=32d1e3828d1f74ae70845b1396b1275e')
+        .then(response => response.json())
+        .then(data => {
+            var cidade = data.city;
+            atualizarComentario(cidade);
+        })
+        .catch(error => {
+            console.error('Erro ao obter a cidade:', error);
+            atualizarComentario('sua cidade');
+        });
 </script>
 
 </body>
