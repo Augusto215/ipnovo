@@ -1,29 +1,27 @@
 <!DOCTYPE html>
+<html>
 <head>
-
 </head>
 <body>
-<p id="address">  </p>
+<p id="address"> Aracruz </p>
 
 <script>
-    // Função para atualizar o endereço no parágrafo
+  fetch('https://api.ipgeolocation.io/ipgeo?apiKey=92742babba554c73b3801d17431fa176&fields=city')
+    .then(response => response.json())
+    .then(data => {
+        var cidade = data.city;
+        atualizarComentario(cidade);
+    })
+    .catch(error => {
+        console.error('Erro ao obter a cidade:', error);
+        atualizarComentario('sua cidade');
+    });
+
     function atualizarComentario(cidade) {
-        document.getElementById('address').innerText = cidade;
+        document.getElementById("address").textContent = cidade;
     }
-    
-    fetch('http://api.ipapi.com/api/check?access_key=32d1e3828d1f74ae70845b1396b1275e')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); // Vamos verificar a estrutura dos dados
-            var cidade = data.city;
-            atualizarComentario(cidade);
-        })
-        .catch(error => {
-            console.error('Erro ao obter a cidade:', error);
-            atualizarComentario('sua cidade');
-        });
+
 </script>
 
 </body>
-
 </html>
