@@ -3,7 +3,7 @@
 
 </head>
 <body>
-<p id="address"> Aracruz </p>
+<p id="address">  </p>
 
 <script>
     // Função para atualizar o endereço no parágrafo
@@ -11,9 +11,10 @@
         document.getElementById('address').innerText = cidade;
     }
     
-    fetch('https://api.ipapi.com/check?access_key=32d1e3828d1f74ae70845b1396b1275e')
+    fetch('http://api.ipapi.com/api/check?access_key=32d1e3828d1f74ae70845b1396b1275e')
         .then(response => response.json())
         .then(data => {
+            console.log(data); // Vamos verificar a estrutura dos dados
             var cidade = data.city;
             atualizarComentario(cidade);
         })
